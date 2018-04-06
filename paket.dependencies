@@ -1,0 +1,12 @@
+source https://api.nuget.org/v3/index.json
+storage: none
+
+nuget FSharp.Core
+nuget Fable.Core
+clitool dotnet-fable
+
+nuget Fable.PowerPack
+nuget Fable.Elmish
+nuget Fable.React
+nuget Fable.Elmish.React
+nuget Fable.Elmish.HMR
