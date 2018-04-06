@@ -11,8 +11,10 @@ var babelOptions = fableUtils.resolveBabelOptions({
   plugins: ['transform-runtime']
 });
 
+var isProd = process.argv.indexOf('-p') >= 0;
+
 module.exports = {
-  devtool: 'source-map',
+  devtool: isProd ? undefined : 'source-map',
   entry: resolve('./src/giphy.fsproj'),
   output: {
     filename: 'bundle.js',
@@ -34,6 +36,7 @@ module.exports = {
         use: {
           loader: 'fable-loader',
           options: {
+            define: isProd ? [] : ["DEBUG"],
             babel: babelOptions
           }
         }
@@ -48,7 +51,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [
+  plugins: isProd ? [] : [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin()
   ]
