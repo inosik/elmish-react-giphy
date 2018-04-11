@@ -1,0 +1,17 @@
+image: 2020ip/dotnet-mono
+
+stages:
+  - build
+
+before_script:
+  - dotnet --info
+  - mono --version
+
+# That doesn't make sense, but we can verify that the project is syntactically
+# correct.
+build:
+  stage: build
+  script:
+    - mono .paket/paket.exe restore
+    - dotnet restore src/
+    - dotnet build src/
